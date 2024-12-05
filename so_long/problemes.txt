@@ -1,0 +1,1 @@
+La fonction strdup est utilisee dans make_map.
