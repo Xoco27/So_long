@@ -23,17 +23,19 @@ void	*ft_delete(char **map, int i)
 char	**make_tab(char **map)
 {
 	char	*txt;
-	int	fd;
-	int	i;
+	int		fd;
+	int		i;
 
 	i = 0;
 	fd = open("maps/map.ber", O_RDONLY);
 	if (fd < 0)
 		return (perror("Error opening file 1."), NULL);
-	while ((txt = get_next_line(fd)))
+	txt = get_next_line(fd);
+	while (txt)
 	{
 		i++;
 		free(txt);
+		txt = get_next_line(fd);
 	}
 	if (i == 0)
 		return (perror("Error: Empty map file"), NULL);
@@ -48,17 +50,15 @@ char	**make_tab(char **map)
 char	**fill_rows(char **map)
 {
 	char	*txt;
-	int	fd;
-	int	i;
+	int		fd;
+	int		i;
 
 	i = 0;
 	fd = open("maps/map.ber", O_RDONLY);
 	if (fd < 0)
-	{
-		free(map);
-		return (perror("Error opening file 2."), NULL);
-	}
-	while ((txt = get_next_line(fd)))
+		error(map);
+	txt = get_next_line(fd);
+	while (txt)
 	{
 		clean_line(txt);
 		map[i] = strdup(txt);
@@ -68,6 +68,7 @@ char	**fill_rows(char **map)
 			close(fd);
 			return (ft_delete(map, i));
 		}
+		txt = get_next_line(fd);
 		i++;
 	}
 	map[i] = NULL;
@@ -77,7 +78,8 @@ char	**fill_rows(char **map)
 
 void	print_img(void *img, int x, int y, t_data *data)
 {
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img, x * TILE, y * TILE);
+	mlx_put_image_to_window(data->mlx_ptr,
+		data->win_ptr, img, x * TILE, y * TILE);
 }
 
 void	print_map(char **map, t_data *data)
@@ -87,7 +89,7 @@ void	print_map(char **map, t_data *data)
 
 	y = 0;
 	if (!map || !map[y])
-		return;
+		return ;
 	while (map[y])
 	{
 		x = 0;

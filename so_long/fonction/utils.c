@@ -6,19 +6,21 @@
 /*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 12:17:51 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/06 13:12:23 by cfleuret         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:47:36 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
+
 void	clean_line(char *line)
 {
-	size_t len;
+	size_t	len;
+
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
 }
 
-int	check_ES(char **map)
+int	check_es(char **map)
 {
 	int	x;
 	int	y;
@@ -28,7 +30,7 @@ int	check_ES(char **map)
 	y = 0;
 	e = 0;
 	s = 0;
-	while(map[y])
+	while (map[y])
 	{
 		x = 0;
 		while (map[y][x])
@@ -42,6 +44,21 @@ int	check_ES(char **map)
 		y++;
 	}
 	if (e != 1 || s != 1)
-		return (1);
-	return (0);
+		return (0);
+	return (1);
+}
+
+void	error(char **map)
+{
+	free(map);
+	perror("Error:\n can't open file.");
+}
+
+void	score(t_data *data)
+{
+	if (data->map[data->player.pos_y][data->player.pos_x] == 'C')
+	{
+		data->score--;
+		data->map[data->player.pos_y][data->player.pos_x] = '0';
+	}
 }
