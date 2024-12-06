@@ -6,7 +6,7 @@
 /*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:39:20 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/04 13:45:27 by cfleuret         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:05:11 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -20,6 +20,7 @@
 #  define TILE 128
 # endif
 
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
@@ -61,6 +62,7 @@ typedef struct s_data
 {
         void		*mlx_ptr;
         void		*win_ptr;
+        char		**map;
         int		win_width;
         int		win_height;
 	t_map		img;
@@ -80,4 +82,13 @@ char	**make_tab(char **map);
 char	**fill_rows(char **map);
 void	print_img(void *img, int x, int y, t_data *data);
 void	print_map(char **map, t_data *data);
+int	check(char **map);
+void    clean_line(char *line);
+void	destroy(t_data *data);
+int     check_ES(char **map);
+void    pos(char **map, t_data *data);
+void    down_char(char **map, t_data *data);
+void	up_char(char **map, t_data *data);
+void	right_char(char **map, t_data *data);
+void	left_char(char **map, t_data *data);
 #endif

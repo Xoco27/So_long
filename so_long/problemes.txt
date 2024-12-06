@@ -1,1 +1,2 @@
 La fonction strdup est utilisee dans make_map.
+Une variable static pour avoir la taille de la premiere ligne serait avantageux.

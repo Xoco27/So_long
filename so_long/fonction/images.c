@@ -6,7 +6,7 @@
 /*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:43:30 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/04 13:52:42 by cfleuret         ###   ########.fr       */
+/*   Updated: 2024/12/06 12:51:20 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -33,8 +33,6 @@ void	create_images(t_data *data)
 			&data->img.width, &data->img.height);
 	data->img.item = mlx_xpm_file_to_image(data->mlx_ptr, "assets/item.xpm",
 			&data->img.width, &data->img.height);
-	data->img.spawn = mlx_xpm_file_to_image(data->mlx_ptr, "assets/spawn.xpm",
-			&data->img.width, &data->img.height);
 	data->player.up = mlx_xpm_file_to_image(data->mlx_ptr, "assets/link_up.xpm",
 			&data->player.width, &data->player.height);
 	data->player.down = mlx_xpm_file_to_image(data->mlx_ptr, "assets/link_down.xpm",
@@ -43,4 +41,18 @@ void	create_images(t_data *data)
 			&data->player.width, &data->player.height);
 	data->player.left = mlx_xpm_file_to_image(data->mlx_ptr, "assets/link_left.xpm",
 			&data->player.width, &data->player.height);
+}
+
+void	destroy(t_data *data)
+{
+	mlx_destroy_image(data->mlx_ptr, data->img.wall);
+	mlx_destroy_image(data->mlx_ptr, data->img.floor);
+	mlx_destroy_image(data->mlx_ptr, data->img.background);
+	mlx_destroy_image(data->mlx_ptr, data->img.exit_closed);
+	mlx_destroy_image(data->mlx_ptr, data->img.exit_opened);
+	mlx_destroy_image(data->mlx_ptr, data->img.item);
+	mlx_destroy_image(data->mlx_ptr, data->player.up);
+	mlx_destroy_image(data->mlx_ptr, data->player.down);
+	mlx_destroy_image(data->mlx_ptr, data->player.right);
+	mlx_destroy_image(data->mlx_ptr, data->player.left);
 }

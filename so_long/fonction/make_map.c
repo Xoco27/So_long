@@ -6,7 +6,7 @@
 /*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:48:22 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/05 15:46:44 by cfleuret         ###   ########.fr       */
+/*   Updated: 2024/12/06 14:26:18 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -60,6 +60,7 @@ char	**fill_rows(char **map)
 	}
 	while ((txt = get_next_line(fd)))
 	{
+		clean_line(txt);
 		map[i] = strdup(txt);
 		free(txt);
 		if (!map[i])
@@ -87,23 +88,23 @@ void	print_map(char **map, t_data *data)
 	y = 0;
 	if (!map || !map[y])
 		return;
-	while (map[++y])
+	while (map[y])
 	{
 		x = 0;
-		if (!map[y][x])
-			break;
-		while (map[y][++x])
+		while (map[y][x])
 		{
-			if (map[y][x] == '1')
-				print_img(data->player.up, x, y, data);
-			else if (map[y][x] == '0')
+			if (map[y][x] == '0')
 				print_img(data->img.floor, x, y, data);
+			else if (map[y][x] == '1')
+				print_img(data->img.wall, x, y, data);
 			else if (map[y][x] == 'C')
 				print_img(data->img.item, x, y, data);
 			else if (map[y][x] == 'E')
 				print_img(data->img.exit_closed, x, y, data);
 			else if (map[y][x] == 'P')
-				print_img(data->img.spawn, x, y, data);
+				print_img(data->player.down, x, y, data);
+			x++;
 		}
+		y++;
 	}
 }
