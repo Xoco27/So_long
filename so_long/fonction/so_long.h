@@ -95,4 +95,8 @@ void	left_char(char **map, t_data *data);
 void	error(char **map);
 void	score(t_data *data);
 void	ft_exit(t_data *data);
+void	down_char(char **map, t_data *data);
+void	up_char(char **map, t_data *data);
+void	right_char(char **map, t_data *data);
+void	left_char(char **map, t_data *data);
 #endif

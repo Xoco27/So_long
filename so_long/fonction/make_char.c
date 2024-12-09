@@ -44,6 +44,7 @@ void	down_char(char **map, t_data *data)
 		print_img(data->player.down, data->player.pos_x,
 			data->player.pos_y, data);
 		score(data);
+		printf("%d", data->score);
 		ft_exit(data);
 	}
 	else
@@ -60,6 +61,7 @@ void	up_char(char **map, t_data *data)
 		print_img(data->player.up, data->player.pos_x,
 			data->player.pos_y, data);
 		score(data);
+		printf("%d", data->score);
 		ft_exit(data);
 	}
 	else
@@ -76,6 +78,7 @@ void	right_char(char **map, t_data *data)
 		print_img(data->player.right, data->player.pos_x,
 			data->player.pos_y, data);
 		score(data);
+		printf("%d", data->score);
 		ft_exit(data);
 	}
 	else
@@ -92,6 +95,7 @@ void	left_char(char **map, t_data *data)
 		print_img(data->player.left, data->player.pos_x,
 			data->player.pos_y, data);
 		score(data);
+		printf("%d", data->score);
 		ft_exit(data);
 	}
 	else

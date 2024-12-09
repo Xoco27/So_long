@@ -32,14 +32,16 @@ int	on_keypress(int keysym, t_data *data)
 		right_char(data->map, data);
 	if (keysym == XK_a)
 		left_char(data->map, data);
+	if (keysym == XK_Escape)
+		on_destroy(data);
 	return (0);
 }
 
 void	hook(t_data *data)
 {
-	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, &data);
+	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, on_keypress, data);
 	mlx_hook(data->win_ptr, DestroyNotify, StructureNotifyMask,
-                &on_destroy, &data);
+                on_destroy, data);
 	mlx_loop(data->mlx_ptr);
 }
 
@@ -65,10 +67,8 @@ int	main(void)
 		return (1);
 	print_map(data.map, &data);
 	pos(data.map, &data);
-	//hook(&data);
-	mlx_hook(data.win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, &data);
-	mlx_hook(data.win_ptr, DestroyNotify, StructureNotifyMask,
-		&on_destroy, &data);
-	mlx_loop(data.mlx_ptr);
+	hook(&data);
+	if (data.score == 0 && data.map[data.player.pos_y][data.player.pos_x] == 'E')
+		printf("Vous avez gagné !");
 	return (0);
 }
