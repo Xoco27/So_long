@@ -6,10 +6,10 @@
 /*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:19:58 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/13 19:02:14 by cfleuret         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:28:37 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	ft_exit(t_data *data)
 {
@@ -33,10 +33,15 @@ void	ft_exit(t_data *data)
 	}
 }
 
-void	make_copy(char **map, char ***copy, int y)
+void	make_copy(char **map, char ***copy)
 {
 	int	i;
+	int	y;
 
+	i = 0;
+	y = 0;
+	while (map[y])
+		y++;
 	i = 0;
 	*copy = malloc((y + 1) * sizeof(char *));
 	if (!*copy)
@@ -103,17 +108,13 @@ int	is_map_valid(t_data *data)
 
 int	another_check(t_data *data)
 {
-	int	y;
-
-	y = 0;
-	while (data->map[y])
-		y++;
 	data->score = check(data->map);
 	data->total = data->score;
 	data->r = 0;
+	data->img.foe_frame = 0;
 	if (data->score == 0)
 		return (1);
-	make_copy(data->map, &data->copy, y);
+	make_copy(data->map, &data->copy);
 	if (is_map_valid(data) == 0)
 		return (perror("Error\n Map cannot be finished"), 1);
 	return (0);

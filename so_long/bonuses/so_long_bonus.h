@@ -6,11 +6,11 @@
 /*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:39:20 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/12 14:53:54 by cfleuret         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:52:50 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000000
@@ -41,6 +41,11 @@ typedef struct s_map
 	void	*exit_opened;
 	void	*item;
 	void	*spawn;
+	void	*img_foe;
+	void	*foe;
+	void	*foe_right;
+	void	*foe_left;
+	int		foe_frame;
 	int		width;
 	int		height;
 }		t_map;
@@ -51,6 +56,7 @@ typedef struct s_player
 	void	*down;
 	void	*right;
 	void	*left;
+	void	*dead;
 	int		width;
 	int		height;
 	int		pos_x;
@@ -94,4 +100,10 @@ void	score(t_data *data);
 void	ft_exit(t_data *data);
 int		is_map_valid(t_data *data);
 int		another_check(t_data *data);
+int		print_foe(t_data *data);
+void	timer(void);
+void	contact(t_data *data);
+int		movement(int keysym, t_data *data);
+void	make_copy(char **map, char ***copy);
+void	anime(t_data *data, int x, int y);
 #endif
