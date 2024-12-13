@@ -1,45 +1,56 @@
-INCLUDES = -I/usr/include -Imlx
-
-SO_LONG =	main.c
-
-OBJS = $(SO_LONG:.c=.o)
-
-MLX_DIR = ./mlx
-
-MLX_LIB = $(MLX_DIR)/libmlx_$(UNAME).a
-
-MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
-
-LIBFT = libft/libft.a
-
-NAME = so_long.a
+NAME = so_long
 
 CC = cc
-
 CFLAGS = -Wall -Wextra -Werror
 
-.c.o:
-			$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
-			
-$(NAME): 	$(OBJS) $(LIBFT) $(MLX_LIB)
-			cp $(OBJS) $(LIBFT)
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS)
+SRC_DIR = bonuses
+OBJ_DIR = obj
+LIBFT_DIR = libft
+PRINTF_DIR = ft_printf
+MLX_DIR = mlx
+ASSETS_DIR = assets
+MAPS_DIR = maps
+
+SO_LONG = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(SO_LONG:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+LIBFT = $(LIBFT_DIR)/libft.a
+MLX_LIB = $(MLX_DIR)/libmlx.a
+PRINTF = $(PRINTF_DIR)/libftprintf.a
+
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -L/usr/lib/X11 -lXext -lX11
+
+INCLUDES = -I/usr/include -Imlx -I$(LIBFT_DIR) -I$(PRINTF_DIR)
+
+all: $(NAME)
+
+$(NAME): $(OBJS) $(LIBFT) $(MLX_LIB) $(PRINTF)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX_FLAGS) $(PRINTF)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 $(LIBFT):
-		$(MAKE) -C libft
+	$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX_LIB):
-		@make -C $(MLX_DIR)
-
-all:		$(NAME) $(MLX_FLAGS)
+	$(MAKE) -C $(MLX_DIR)
+	
+$(PRINTF):
+	$(MAKE) -C $(PRINTF_DIR)
 
 clean:
-			$(MAKE) clean -C libft
-			rm -f $(OBJS)
+	$(MAKE) clean -C $(LIBFT_DIR)
+	$(MAKE) clean -C $(MLX_DIR)
+	$(MAKE) clean -C $(PRINTF_DIR)
+	rm -rf $(OBJ_DIR)
 
-fclean:		clean
-			rm -f $(NAME) $(LIBFT)
+fclean: clean
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	$(MAKE) fclean -C $(PRINTF_DIR)
+	rm -f $(NAME)
 
-re:			fclean all
+re: fclean all
 
-.PHONY:		all clean fclean re
+.PHONY: all clean fclean re
