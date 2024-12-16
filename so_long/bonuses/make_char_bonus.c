@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_char.c                                        :+:      :+:    :+:   */
+/*   make_char_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:00:15 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/10 17:34:12 by cfleuret         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:28:02 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long_bonus.h"
@@ -36,92 +36,60 @@ void	pos(char **map, t_data *data)
 
 void	down_char(char **map, t_data *data)
 {
-	if (map[data->player.pos_y + 1][data->player.pos_x] != '1')
+	if (map[data->player.pos_y + 1][data->player.pos_x] != '1'
+			&& map[data->player.pos_y + 1][data->player.pos_x] != 'E'
+			&& data->score != 0)
 	{
-		if (map[data->player.pos_y + 1][data->player.pos_x] == 'F')
-		{
-			contact(data);
-			data->player.pos_y += 1;
-			return ;
-		}
-		print_img(data->img.floor, data->player.pos_x,
-			data->player.pos_y, data);
-		data->player.pos_y += 1;
-		print_img(data->player.down, data->player.pos_x,
-			data->player.pos_y, data);
-		data->move++;
-		score(data);
-		ft_exit(data);
+		actions(data, 0, 1);
 	}
-	else
-		return ;
+	else if (map[data->player.pos_y + 1][data->player.pos_x] != '1'
+			&& data->score == 0)
+	{
+		actions(data, 0, 1);
+	}
 }
 
 void	up_char(char **map, t_data *data)
 {
-	if (map[data->player.pos_y - 1][data->player.pos_x] != '1')
+	if (map[data->player.pos_y - 1][data->player.pos_x] != '1'
+			&& map[data->player.pos_y - 1][data->player.pos_x] != 'E'
+			&& data->score != 0)
 	{
-		if (map[data->player.pos_y - 1][data->player.pos_x] == 'F')
-		{
-			contact(data);
-			data->player.pos_y -= 1;
-			return ;
-		}
-		print_img(data->img.floor, data->player.pos_x,
-			data->player.pos_y, data);
-		data->player.pos_y -= 1;
-		print_img(data->player.up, data->player.pos_x,
-			data->player.pos_y, data);
-		data->move++;
-		score(data);
-		ft_exit(data);
+		actions(data, 0, -1);
 	}
-	else
-		return ;
+	else if (map[data->player.pos_y - 1][data->player.pos_x] != '1'
+			&& data->score == 0)
+	{
+		actions(data, 0, -1);
+	}
 }
 
 void	right_char(char **map, t_data *data)
 {
-	if (map[data->player.pos_y][data->player.pos_x + 1] != '1')
+	if (map[data->player.pos_y][data->player.pos_x + 1] != '1'
+			&& map[data->player.pos_y][data->player.pos_x + 1] != 'E'
+			&& data->score != 0)
 	{
-		if (map[data->player.pos_y][data->player.pos_x + 1] == 'F')
-		{
-			contact(data);
-			data->player.pos_x += 1;
-			return ;
-		}
-		print_img(data->img.floor, data->player.pos_x,
-			data->player.pos_y, data);
-		data->player.pos_x += 1;
-		print_img(data->player.right, data->player.pos_x,
-			data->player.pos_y, data);
-		data->move++;
-		score(data);
-		ft_exit(data);
+		actions(data, 1, 0);
 	}
-	else
-		return ;
+	else if (map[data->player.pos_y][data->player.pos_x + 1] != '1'
+			&& data->score == 0)
+	{
+		actions(data, 1, 0);
+	}
 }
 
 void	left_char(char **map, t_data *data)
 {
-	if (map[data->player.pos_y][data->player.pos_x - 1] != '1')
+	if (map[data->player.pos_y][data->player.pos_x - 1] != '1'
+			&& map[data->player.pos_y][data->player.pos_x - 1] != 'E'
+			&& data->score != 0)
 	{
-		if (map[data->player.pos_y][data->player.pos_x - 1] == 'F')
-		{
-			contact(data);
-			data->player.pos_x -= 1;
-			return ;
-		}
-		print_img(data->img.floor, data->player.pos_x,
-			data->player.pos_y, data);
-		data->player.pos_x -= 1;
-		print_img(data->player.left, data->player.pos_x,
-			data->player.pos_y, data);
-		data->move++;
-		score(data);
-		ft_exit(data);
+		actions(data, -1, 0);
 	}
-	else
-		return ;
+	else if (map[data->player.pos_y][data->player.pos_x - 1] != '1'
+			&& data->score == 0)
+	{
+		actions(data, -1, 0);
+	}
 }

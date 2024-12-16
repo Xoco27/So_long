@@ -114,3 +114,27 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
+
+int	non_valid(char **map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] != '1' && map[y][x] != '0' && map[y][x] != 'C'
+					&& map[y][x] != 'E' && map[y][x] != 'P' && map[y][x] != 'F')
+			{
+				perror("Error\nInvalid character in the map.");
+				return (1);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}

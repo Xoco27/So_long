@@ -112,10 +112,21 @@ int	another_check(t_data *data)
 	data->total = data->score;
 	data->r = 0;
 	data->img.foe_frame = 0;
-	if (data->score == 0)
+	if (non_valid(data->map) == 1)
+	{
+		free_map(data->map);
 		return (1);
+	}
+	if (data->score == 0)
+	{
+		free_map(data->map);
+		return (1);
+	}
 	make_copy(data->map, &data->copy);
 	if (is_map_valid(data) == 0)
+	{
+		free_map(data->map);
 		return (perror("Error\n Map cannot be finished"), 1);
+	}
 	return (0);
 }

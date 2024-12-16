@@ -6,7 +6,7 @@
 /*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:43:30 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/11 12:05:53 by cfleuret         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:11:42 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -53,4 +53,28 @@ void	destroy(t_data *data)
 	mlx_destroy_image(data->mlx_ptr, data->player.down);
 	mlx_destroy_image(data->mlx_ptr, data->player.right);
 	mlx_destroy_image(data->mlx_ptr, data->player.left);
+}
+
+int	non_valid(char **map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] != '1' && map[y][x] != '0' && map[y][x] != 'C'
+					&& map[y][x] != 'E' && map[y][x] != 'P')
+			{
+				perror("Error\nInvalid character in the map.");
+				return (1);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
 }

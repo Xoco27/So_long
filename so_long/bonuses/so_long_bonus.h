@@ -106,4 +106,6 @@ void	contact(t_data *data);
 int		movement(int keysym, t_data *data);
 void	make_copy(char **map, char ***copy);
 void	anime(t_data *data, int x, int y);
+void	actions(t_data *data, int x, int y);
+int		non_valid(char **map);
 #endif

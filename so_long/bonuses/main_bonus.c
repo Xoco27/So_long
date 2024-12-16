@@ -91,8 +91,8 @@ int	main(int argc, char **argv)
 		return (perror("Error\nFailure initiating window"), 1);
 	create_images(&data);
 	print_map(data.map, &data);
-	mlx_loop_hook(data.mlx_ptr, print_foe, &data);
 	pos(data.map, &data);
+	mlx_loop_hook(data.mlx_ptr, print_foe, &data);
 	hook(&data);
 	free_map(data.map);
 	return (0);

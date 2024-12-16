@@ -94,4 +94,5 @@ void	score(t_data *data);
 void	ft_exit(t_data *data);
 int		is_map_valid(t_data *data);
 int		another_check(t_data *data);
+int		non_valid(char **map);
 #endif

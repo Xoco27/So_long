@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus.c                                            :+:      :+:    :+:   */
+/*   bonus_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:09:40 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/13 17:42:19 by cfleuret         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:29:52 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long_bonus.h"
@@ -96,4 +96,34 @@ int	movement(int keysym, t_data *data)
 			return (1);
 	}
 	return (0);
+}
+
+void	actions(t_data *data, int x, int y)
+{
+	if (data->map[data->player.pos_y + y][data->player.pos_x + x] == 'F')
+	{
+		contact(data);
+		data->player.pos_x += x;
+		data->player.pos_y += y;
+		return ;
+	}
+	print_img(data->img.floor, data->player.pos_x,
+		data->player.pos_y, data);
+	data->player.pos_x += x;
+	data->player.pos_y += y;
+	if (x == -1)
+		print_img(data->player.left, data->player.pos_x,
+			data->player.pos_y, data);
+	else if (x == 1)
+		print_img(data->player.right, data->player.pos_x,
+			data->player.pos_y, data);
+	else if (y == -1)
+		print_img(data->player.up, data->player.pos_x,
+			data->player.pos_y, data);
+	else if (y == 1)
+		print_img(data->player.down, data->player.pos_x,
+			data->player.pos_y, data);
+	data->move++;
+	score(data);
+	ft_exit(data);
 }

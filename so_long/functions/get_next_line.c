@@ -114,20 +114,3 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-/*int	main(void)
-{
-	int	fd;
-	int	i;
-
-	i = 0;
-	fd = open("map.ber", O_RDONLY);
-	while (i < 5)
-	{
-		char *line = get_next_line(fd);
-		printf("%s", line);
-		free (line);
-		i++;
-	}
-	close(fd);
-	return (0);
-}*/
