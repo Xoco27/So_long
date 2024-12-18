@@ -124,6 +124,4 @@ void	actions(t_data *data, int x, int y)
 		print_img(data->player.down, data->player.pos_x,
 			data->player.pos_y, data);
 	data->move++;
-	score(data);
-	ft_exit(data);
 }
