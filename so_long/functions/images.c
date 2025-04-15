@@ -3,13 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cfleuret <cfleuret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:43:30 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/16 16:11:42 by cfleuret         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:31:50 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "so_long.h"
+
+int	check_filename(char *filename)
+{
+	int	len;
+
+	len = strlen(filename);
+	if (len < 4 || ft_strncmp(filename + len - 4, ".ber", len) != 0)
+		return (1);
+	return (0);
+}
 
 void	wh(t_data *data)
 {
@@ -17,6 +28,7 @@ void	wh(t_data *data)
 	data->img.height = TILE;
 	data->player.width = TILE;
 	data->player.height = TILE;
+	pos((*data).map, data);
 }
 
 void	create_images(t_data *data)
@@ -40,6 +52,7 @@ void	create_images(t_data *data)
 			"assets/link_right.xpm", &data->player.width, &data->player.height);
 	data->player.left = mlx_xpm_file_to_image(data->mlx_ptr,
 			"assets/link_left.xpm", &data->player.width, &data->player.height);
+	print_map((*data).map, data);
 }
 
 void	destroy(t_data *data)

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   images_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cfleuret <cfleuret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:43:30 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/13 20:29:34 by cfleuret         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:31:46 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "so_long_bonus.h"
 
 void	wh(t_data *data)
@@ -53,6 +54,8 @@ void	create_images(t_data *data)
 	data->img.foe = mlx_xpm_file_to_image(data->mlx_ptr,
 			"assets/foe.xpm", &data->img.width, &data->img.height);
 	create_more(data);
+	print_map((*data).map, data);
+	pos((*data).map, data);
 }
 
 void	destroy(t_data *data)

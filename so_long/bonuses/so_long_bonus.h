@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cfleuret <cfleuret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:39:20 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/12 15:52:50 by cfleuret         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:59:44 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
-
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000000
 # endif
-
 # ifndef TILE
 #  define TILE 128
 # endif
@@ -108,4 +107,6 @@ void	make_copy(char **map, char ***copy);
 void	anime(t_data *data, int x, int y);
 void	actions(t_data *data, int x, int y);
 int		non_valid(char **map);
+int		check_filename(char *filename);
+int		initiate(t_data *data);
 #endif

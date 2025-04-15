@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cfleuret <cfleuret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:08:57 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/11 11:27:01 by cfleuret         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:26:45 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -101,7 +101,7 @@ int	check(char **map)
 	if (c == 0)
 		return (perror("Error\nMap does not have any collectibles"), 0);
 	if (check_es(map) == 0)
-		return (perror("Error\nMap does not have an exit or a spawn"), 0);
+		return (perror("Error\nNo spawn or exit or too many of those"), 0);
 	else
 		return (c);
 }

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cfleuret <cfleuret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:17:44 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/12 14:46:44 by cfleuret         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:31:54 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "so_long.h"
 
 void	set_win(t_data *data)
@@ -71,23 +72,20 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (perror("Error\nNot enough or too much arguments."), 1);
+	if (check_filename(argv[1]) == 1)
+		return (perror("Error\nWrong file extension"), 1);
 	data.move = 0;
 	data.map = make_tab(data.map, argv);
+	if (data.map == NULL)
+		return (perror("Error\nEmpty map"), 1);
 	if (another_check(&data) == 1)
 		return (1);
 	if (!data.map)
 		return (perror("Error\nMap making failed."), 1);
 	set_win(&data);
-	data.mlx_ptr = mlx_init();
-	if (!data.mlx_ptr)
-		return (perror("Error\nFailure initiating mlx."), 1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr,
-			data.win_width, data.win_height, "So_long");
-	if (!data.win_ptr)
-		return (perror("Error\nFailure initiating window"), 1);
+	if (initiate(&data) == 1)
+		return (perror("Error\nFailed to initiate data or window"), 1);
 	create_images(&data);
-	print_map(data.map, &data);
-	pos(data.map, &data);
 	hook(&data);
 	free_map(data.map);
 	return (0);

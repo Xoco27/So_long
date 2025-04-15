@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_map.c                                         :+:      :+:    :+:   */
+/*   make_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cfleuret <cfleuret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:48:22 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/10 17:46:26 by cfleuret         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:35:28 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "so_long_bonus.h"
 
 char	**make_tab(char **map, char **argv)
@@ -22,6 +23,8 @@ char	**make_tab(char **map, char **argv)
 	if (fd < 0)
 		return (perror("Error\nError opening file 1."), NULL);
 	txt = get_next_line(fd);
+	if (txt == NULL)
+		return (NULL);
 	while (txt)
 	{
 		i++;
@@ -100,4 +103,16 @@ void	print_map(char **map, t_data *data)
 		}
 		y++;
 	}
+}
+
+int	initiate(t_data *data)
+{
+	data->mlx_ptr = mlx_init();
+	if (!data->mlx_ptr)
+		return (perror("Error\nFailure initiating mlx."), 1);
+	data->win_ptr = mlx_new_window(data->mlx_ptr,
+			data->win_width, data->win_height, "So_long");
+	if (!data->win_ptr)
+		return (perror("Error\nFailure initiating window"), 1);
+	return (0);
 }

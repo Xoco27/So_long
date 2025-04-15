@@ -13,8 +13,11 @@ MLX_DIR = mlx
 ASSETS_DIR = assets
 MAPS_DIR = maps
 
-SO_LONG = $(wildcard $(SRC_DIR)/*.c)
-SO_LONG_BONUS = $(wildcard $(BONUS_DIR)/*.c)
+SO_LONG =	functions/check.c functions/get_next_line.c functions/images.c functions/main.c \
+			functions/make_char.c functions/make_map.c functions/render.c functions/utils.c
+SO_LONG_BONUS = bonuses/check_bonus.c bonuses/get_next_line_bonus.c bonuses/images_bonus.c bonuses/main_bonus.c \
+			bonuses/make_char_bonus.c bonuses/make_map_bonus.c bonuses/render_bonus.c bonuses/utils_bonus.c \
+			bonuses/bonus_bonus.c bonuses/one_more.c
 
 OBJS = $(SO_LONG:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 OBJB = $(SO_LONG_BONUS:$(BONUS_DIR)/%.c=$(OBJ_DIR)/%.o)

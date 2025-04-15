@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfleuret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cfleuret <cfleuret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:39:20 by cfleuret          #+#    #+#             */
-/*   Updated: 2024/12/12 14:53:54 by cfleuret         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:59:39 by cfleuret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
-
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000000
 # endif
-
 # ifndef TILE
 #  define TILE 128
 # endif
@@ -95,4 +94,6 @@ void	ft_exit(t_data *data);
 int		is_map_valid(t_data *data);
 int		another_check(t_data *data);
 int		non_valid(char **map);
+int		check_filename(char *filename);
+int		initiate(t_data *data);
 #endif
